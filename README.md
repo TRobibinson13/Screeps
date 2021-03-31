@@ -6,7 +6,6 @@ Helpful Resources
 
 * Gamesite:  https://screeps.com/ 
 * Into to JS: https://www.codecademy.com/learn/introduction-to-javascript
-* Notes:  https://salesforce.quip.com/Di7aAOCxGhNG
 * Youtube Videos
     * Learn Code By Gaming (https://www.youtube.com/channel/UCD8vb6Bi7_K_78nItq5YITA)
         * Screeps Tutorial Walkthrough for Beginners - 1. Game UI & Basic Scripting (https://www.youtube.com/watch?v=OacP_hyKs0c&t=330s)
