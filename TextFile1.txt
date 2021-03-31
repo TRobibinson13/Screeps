@@ -1,1 +1,16 @@
-﻿
+﻿ Game.spawns['Spawn1'].spawnCreep( [WORK, CARRY, MOVE], 'Harvester2' );   
+
+test
+
+    /*
+    if(mycreep.store.[RESOURCE_ENERGY] < mycreep.store.getCapacity()) {
+        goHarvest(mycreep);
+        currentActivity = "GATHER";
+        message = currentActivity;
+    }
+    
+    currentActivity = "GATHER";
+    message = currentActivity;
+        
+    */
+    
