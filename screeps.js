@@ -1,34 +1,83 @@
+//create vars for various types of workers
+var initSpawnCount = 3;
+var initName = "Init" + initSpawnCount;
+
+var numbahTwoSpawnCount = 1;
+var numbahTwoName = "NumbahTwo." + numbahTwoSpawnCount;
+
+//create identifiers for various spawns
+var homeBase = "Spawn1";
+
+var bases = [homeBase];
+
+//This is the main game loop.  The code inside of these curly brackets will run once per tick.
 module.exports.loop = function () {
-    //This is the main game loop.  The code inside of these curly brackets will run once per tick.
-    var message = "Idle";
+
+    //if creep doesnt not exist, create it from spawn
+    Game.spawns[homeBase].spawnCreep([WORK, MOVE, MOVE, CARRY, CARRY], initName);
+    Game.spawns[homeBase].spawnCreep([WORK, MOVE, MOVE, CARRY, CARRY], numbahTwoName);
+
+        //currently spawning manually with "Game.spawns["Spawn1"].spawnCreep([WORK, MOVE, MOVE, CARRY, CARRY],"Init3");"
+
+        // if creeps with role of harvester do not exist, create
+
+            // if energy < x, create basic unit 
+
+        // if creeps with role of X do not exist, create
+
+            // if energy < x, create basic unit
+
+        // if creeps with role of Y do not exist, create
+
+            // if energy < x, create basic unit
+
+        //set count of creeps
+
+    //#region Havesters
+    // create list of harvesters
+    var harvesters = [initName, numbahTwoName];
+    var message = "";
     var currentActivity = "";
-    
-    //if our creep doesnt exist, create it from spawn
-        //var result = Game.spawns["Spawn1"].spawnCreep([WORK, MOVE, CARRY, MOVE],"Init");
-    Game.spawns["Spawn1"].spawnCreep([WORK, MOVE, CARRY, MOVE],"Init");
-    
-    //get a reference to our creep
-    var mycreep = Game.creeps["Init"];
-    
-    // if a creep has no energy, go to the energy source and harvest some
-    if(mycreep.store[RESOURCE_ENERGY] == 0) {
-        
-        var source = Game.getObjectById("e8cde9a43c0539328c9c5cf2");
-        
-        mycreep.moveTo(source);
-        mycreep.harvest(source);
-        
-        currentActivity = "GATHER";
-        message = currentActivity;
-    } else {
-        // but if creep does have energy, bring it to the controller and upgrade it. 
-        var controller = mycreep.room.controller;
-        
-        mycreep.moveTo(controller);
-        mycreep.upgradeController(controller);
-        
-        currentActivity = "Deposit";
-        message = currentActivity;
-    }
-    mycreep.say(message);
+
+    harvesters.forEach(harvester => {
+       var mycreep = Game.creeps[harvester];
+
+        // If creep has no energy, go gather energy
+        if(mycreep.store.getFreeCapacity() > 0){
+            var sources = mycreep.room.find(FIND_SOURCES);
+            if(mycreep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                mycreep.moveTo(sources[0]);
+            }
+
+            currentActivity = "GATHER";
+            message = currentActivity;
+        }
+        //for each base in bases
+            // if spawn energy is < creep energy, deposit energy at spawn
+            //else, upgrade controller
+     /*   
+            bases.forEach(base => {
+            if(Game.spawns)
+        })
+        if(Game.spawns[])
+     */
+
+        // If Creep does have energy, then go deposit the energy at base
+            //if base energy empty 
+        else {
+            if(mycreep.transfer(Game.spawns[homeBase], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                mycreep.moveTo(Game.spawns[homeBase]);
+            }
+
+            currentActivity = "Dep -" + homeBase;
+            message = currentActivity;
+        }
+
+        // output creeps current activity to world
+        mycreep.say(message);
+    });
+
+    //#endregion Havesters
+
+
 }
